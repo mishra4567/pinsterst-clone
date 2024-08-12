@@ -1,0 +1,12 @@
+08.08.2024 : 22.18
+at first 
+npm init -y
+second
+npm i express mongoose dotenv bcrypt jonwebtoken
+npm i -D nodemon
+ npm i cookie-parser
+ npm i cloudinary
+13.08.2024
+This is a pinsterst clone .
+Made marnstag project. 2.36
+Using mongodb for database ,cloudinary and image/pin save
