@@ -12,3 +12,8 @@ Made marnstag project. 2.36
 Using mongodb for database ,cloudinary and image/pin save
 14.08.2024
 pin create, comment add, comment delete
+14.08.2024 | 01.58
+npm create vite@latest .
+npm i react-router-dom axios react-icons 
+(selest: React, selest Javascript)
+complate backend and download frontend dependencies

@@ -81,3 +81,39 @@ export const deleteComment = TryCatch(async (req, res) => {
     });
   }
 });
+
+//pin delete
+export const deletePin = TryCatch(async (req, res) => {
+  const pin = await Pin.findById(req.params.id);
+  if (!pin)
+    return res.status(400).json({
+      message: "No pin with this ID",
+    });
+  if (pin.owner.toString() !== req.user._id.toString())
+    return res.status(403).json({
+      message: "Unauthorized",
+    });
+  await cloudinary.v2.uploader.destroy(pin.image.id);
+  await pin.deleteOne();
+  res.json({
+    message: "Pin Deleted",
+  });
+});
+//update pin
+export const updatePin = TryCatch(async (req, res) => {
+  const pin = await Pin.findById(req.params.id);
+  if (!pin)
+    return res.status(400).json({
+      message: "No pin with this ID",
+    });
+  if (pin.owner.toString() !== req.user._id.toString())
+    return res.status(403).json({
+      message: "Unauthorized",
+    });
+  pin.title = req.body.title;
+  pin.pin = req.body.pin;
+  await pin.save();
+  res.json({
+    message: "Pin Updated",
+  });
+});
