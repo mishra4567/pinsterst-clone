@@ -17,3 +17,9 @@ npm create vite@latest .
 npm i react-router-dom axios react-icons 
 (selest: React, selest Javascript)
 complate backend and download frontend dependencies
+15.08.2024
+frontend:-
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+npm run dev -in frontend
+npm i react-hot-toast
