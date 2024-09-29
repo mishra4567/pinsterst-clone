@@ -1,14 +1,14 @@
 import { Pin } from "../models/pinModel.js";
 import TryCatch from "../utils/TryCath.js";
-import getDataUrl from "../utils/urlGenerator.js";
+import getDateUrl from "../utils/urlGenerator.js";
 import cloudinary from "cloudinary";
 
 export const createPin = TryCatch(async (req, res) => {
   const { title, pin } = req.body;
   const file = req.file;
-  const fileUrl = getDataUrl(file);
+  const filleUrl = getDateUrl(file);
 
-  const cloud = await cloudinary.v2.uploader.upload(fileUrl.content);
+  const cloud = await cloudinary.v2.uploader.upload(filleUrl.content);
   await Pin.create({
     title,
     pin,
@@ -19,17 +19,19 @@ export const createPin = TryCatch(async (req, res) => {
     owner: req.user._id,
   });
   res.json({
-    message: "Pin Created",
+    message: "Pin created",
   });
 });
 
 export const getAllPins = TryCatch(async (req, res) => {
   const pins = await Pin.find().sort({ createdAt: -1 });
+
   res.json(pins);
 });
 
 export const getSinglePin = TryCatch(async (req, res) => {
   const pin = await Pin.findById(req.params.id).populate("owner", "-password");
+
   res.json(pin);
 });
 
@@ -37,7 +39,7 @@ export const commentOnPin = TryCatch(async (req, res) => {
   const pin = await Pin.findById(req.params.id);
   if (!pin)
     return res.status(400).json({
-      message: "No pin with this ID",
+      message: "No Pin with this id",
     });
   pin.comments.push({
     user: req.user._id,
@@ -54,7 +56,7 @@ export const deleteComment = TryCatch(async (req, res) => {
   const pin = await Pin.findById(req.params.id);
   if (!pin)
     return res.status(400).json({
-      message: "No pin with this ID",
+      message: "No Pin with this id",
     });
   if (!req.query.commentId)
     return res.status(404).json({
@@ -82,12 +84,12 @@ export const deleteComment = TryCatch(async (req, res) => {
   }
 });
 
-//pin delete
 export const deletePin = TryCatch(async (req, res) => {
   const pin = await Pin.findById(req.params.id);
+
   if (!pin)
     return res.status(400).json({
-      message: "No pin with this ID",
+      message: "No Pin with this id",
     });
   if (pin.owner.toString() !== req.user._id.toString())
     return res.status(403).json({
@@ -99,21 +101,24 @@ export const deletePin = TryCatch(async (req, res) => {
     message: "Pin Deleted",
   });
 });
-//update pin
+
 export const updatePin = TryCatch(async (req, res) => {
   const pin = await Pin.findById(req.params.id);
+
   if (!pin)
     return res.status(400).json({
-      message: "No pin with this ID",
+      message: "No Pin with this id",
     });
+
   if (pin.owner.toString() !== req.user._id.toString())
     return res.status(403).json({
       message: "Unauthorized",
     });
-  pin.title = req.body.title;
-  pin.pin = req.body.pin;
-  await pin.save();
+  
+  pin.title = req.body.title
+  pin.pin = req.body.pin
+  await pin.save()
   res.json({
-    message: "Pin Updated",
-  });
+    message: "Pin Updated"
+  })
 });

@@ -1,6 +1,6 @@
 import express from "express";
 import { isAuth } from "../middlewares/isAuth.js";
-import uploadFile from "../middlewares/multer.js";
+import UploadFile from "../middlewares/multer.js";
 import {
   commentOnPin,
   createPin,
@@ -13,12 +13,12 @@ import {
 
 const router = express.Router();
 
-router.post("/new", isAuth, uploadFile, createPin);
+router.post("/new", isAuth, UploadFile, createPin);
 router.get("/all", isAuth, getAllPins);
 router.get("/:id", isAuth, getSinglePin);
-router.put("/:id", isAuth, updatePin);
-router.delete("/:id", isAuth, deletePin);
 router.post("/comment/:id", isAuth, commentOnPin);
 router.delete("/comment/:id", isAuth, deleteComment);
+router.delete("/:id", isAuth, deletePin);
+router.put("/:id", isAuth, updatePin);
 
 export default router;
