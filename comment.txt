@@ -23,7 +23,10 @@ npm install -D tailwindcss postcss autoprefixer
 npx tailwindcss init -p
 npm run dev -in frontend AND backend
 npm i react-hot-toast
+27.09.2024
 28.09.2024
 29.09.2024
-30.09.2024
 add:-- components\Loading.jsx, Navbar.jsx, PinCard.jsx, context\PinContext.jsx, pages\PinPage.jsx, assets\image\images.png, .gitignore
+30.09.2024
+add:-- pin edit,update,delete, || Comment add,delete
+Create page add 
